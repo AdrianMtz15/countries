@@ -12,17 +12,23 @@ const fetchCountries = async() => {
   return countries;
 }
 
-export async function Countries({...htmlProps}: Props) {
+export async function Countries({className, ...htmlProps}: Props) {
   const data: CountryData[] = await fetchCountries();
   const countries = data.filter((obj, index) => {
     if (index <= 9) return obj
   });
 
   return(
-    <section {...htmlProps}>
+    <section 
+      className={`pt-[35px] ${className}`}
+      {...htmlProps}
+    >
       {
         countries.map(obj => (
-          <CountryCard key={obj.population} country={obj}/>
+          <CountryCard 
+            key={obj.population} 
+            country={obj}
+          />
         ))
       }
     </section>
