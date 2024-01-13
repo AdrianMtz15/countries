@@ -1,23 +1,21 @@
-import { Countries } from '@/components/Countries'
-import { InputSearch } from '@/components/InputSearch'
-import { SelectRegion } from '@/components/SelectRegion'
+import { Countries } from '@components/Countries'
+import { MainHeader } from '@components/MainHeader';
 
-export default function Home() {
+const fetchCountries = async (): Promise<CountryData[]> => {
+  const fields = 'name,capital,population,region,capital,flags'
+  const res = await fetch(`https://restcountries.com/v3.1/all?fields=${fields}`);
+  const countries = await res.json();
+
+  return countries;
+}
+
+export default async function Home() {
+  let data = await fetchCountries();
+
   return (
     <main className='relative w-full'>
-      <section className='flex flex-row w-full items-end justify-between px-[10vw]'>
-        <InputSearch 
-          className='mt-[35px]'
-          classNames={{
-            input: 'bg-light-background text-light-text text-[1.5rem]',
-            inputWrapper: 'bg-light-background border shadow-lg'
-          }}
-        />
-
-        <SelectRegion/>
-          
-      </section>
-      <Countries 
+      <MainHeader/>
+      <Countries defaultCountries={data}
         className="grid grid-cols-4 w-full justify-between
         items-center justify-items-center max-w-[1100px] m-auto"
       />

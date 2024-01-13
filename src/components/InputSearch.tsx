@@ -3,7 +3,7 @@ import { Input } from '@nextui-org/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import type { InputProps } from '@nextui-org/react'
 
-export function InputSearch({ className, ...inputProps }: InputProps) {
+export function InputSearch({ className, ...inputProps }: InputProps): JSX.Element {
   return(
     <Input 
       className={`w-[25vw]  ${className}`}

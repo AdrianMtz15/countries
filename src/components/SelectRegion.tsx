@@ -1,15 +1,31 @@
 'use client'
+
+import { useCountriesContext } from "@context/CountriesContext";
 import { Select, SelectItem } from "@nextui-org/react"
+
 
 export function SelectRegion() {
   const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+  const {
+    setRegion
+  } = useCountriesContext();
 
   return(
     <Select 
+      onChange={(e) => {
+        setRegion(e.target.value);
+      }}
+      radius="none"
+      labelPlacement="outside"
+      variant="bordered"
       label="Filter by Region" 
-      className="max-w-xs" 
+      className="max-w-xs bg-light-elements" 
       classNames={{
-        label: 'text-[1.5rem] text-bold'
+        label: 'text-[1.5rem] text-bold text-light-text',
+        value: 'text-[1.8rem]',
+        trigger: 'rounded-md border bg-light-elements',
+        listboxWrapper: 'rounded-md',
+        listbox: 'rounded-md',
       }}
     >
       {
@@ -17,9 +33,10 @@ export function SelectRegion() {
           return(
             <SelectItem
               key={region}
-              value={region.toLowerCase()}
+              value={region}
+              textValue={region}
             >
-              {region}
+              <p className="text-[1.5rem] leading-7">{region}</p>
             </SelectItem>
           )
         })

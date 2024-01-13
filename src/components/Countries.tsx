@@ -1,35 +1,51 @@
+'use client'
 
-import { CountryCard } from "@/components/CountryCard";
-import type{ HTMLAttributes } from "react";
+import{ useEffect, useRef, useState } from "react";
+import { useStore } from "@src/store";
+import { CountryCard } from "@components/CountryCard";
 
+import type { HTMLAttributes, ReactNode, RefObject } from "react";
+import { useIntersecionObserver } from "@src/hooks/useIntersectionObserver";
+import { useInfiniteScroll } from "@src/hooks/useInfiniteScroll";
 
-type Props = HTMLAttributes<HTMLElement>
+type Props = HTMLAttributes<HTMLElement> & {defaultCountries: CountryData[]}
 
-const fetchCountries = async() => {
-  const res = await fetch('https://restcountries.com/v3.1/all');
-  const countries = await res.json();
+export function Countries({ defaultCountries, className, ...htmlProps }: Props) {
+  const allCountries = useStore((state) => state.allCountries);
+  const setAllCountries = useStore((state) => state.setAllCountries);
+  const setRenderCountries = useStore((state) => state.setRenderCountries);
+  const renderCountries = useStore((state) => state.renderCountries);
+  const isLoading = useStore((state) => state.isLoading);
 
-  return countries;
-}
+  const { targetIndex } = useInfiniteScroll();
 
-export async function Countries({className, ...htmlProps}: Props) {
-  const data: CountryData[] = await fetchCountries();
-  const countries = data.filter((obj, index) => {
-    if (index <= 9) return obj
-  });
+  useEffect(() => {
+    setAllCountries(defaultCountries);
+    setRenderCountries(defaultCountries.slice(0, 50));
+  }, []);
 
+  useEffect(() => {
+    console.log('render countries: ', renderCountries);
+  }, [renderCountries])
+  
   return(
     <section 
-      className={`pt-[35px] ${className}`}
+      className={`pt-[35px] h-max ${className}`}
       {...htmlProps}
     >
       {
-        countries.map(obj => (
-          <CountryCard 
-            key={obj.population} 
-            country={obj}
-          />
-        ))
+        isLoading && <p>Loading...</p>
+      }
+      {
+        renderCountries.map((obj, index) => {
+          return(
+            <CountryCard 
+              refIndex={index === targetIndex ? targetIndex : null}
+              key={index}
+              country={obj}
+            />
+          )
+        })
       }
     </section>
   )
