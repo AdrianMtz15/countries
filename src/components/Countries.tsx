@@ -30,7 +30,7 @@ export function Countries({ defaultCountries, className, ...htmlProps }: Props) 
   
   return(
     <section 
-      className={`pt-[35px] h-max ${className}`}
+      className={`countries-container pt-[35px] h-max ${className}`}
       {...htmlProps}
     >
       {
@@ -39,11 +39,12 @@ export function Countries({ defaultCountries, className, ...htmlProps }: Props) 
       {
         renderCountries.map((obj, index) => {
           return(
-            <CountryCard 
-              refIndex={index === targetIndex ? targetIndex : null}
-              key={index}
-              country={obj}
-            />
+            <div key={index} className="px-4 w-full cards-container">
+              <CountryCard 
+                refIndex={index === targetIndex ? targetIndex : null}
+                country={obj}
+              />
+            </div>
           )
         })
       }

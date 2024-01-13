@@ -13,11 +13,11 @@ export default async function Home() {
   let data = await fetchCountries();
 
   return (
-    <main className='relative w-full'>
+    <main className='relative w-full flex flex-col items-center'>
       <MainHeader/>
       <Countries defaultCountries={data}
-        className="grid grid-cols-4 w-full justify-between
-        items-center justify-items-center max-w-[1100px] m-auto"
+        className="flex flex-row w-full flex-wrap
+        items-start justify-items-center"
       />
     </main>
   )

@@ -28,7 +28,7 @@ export const CountryCard = forwardRef(function CountryCard(
 
   return(
     <Card 
-      className="relative w-[220px] h-[250px] rounded-none 
+      className="country-card relative w-full h-[250px] rounded-none 
       p-0 mb-16 hover:cursor-pointer "
       ref={cardRef}
       {...htmlProps}

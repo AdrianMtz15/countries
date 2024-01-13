@@ -24,10 +24,10 @@ export function MainHeader() {
   }
 
   return(
-    <section className='flex flex-row w-full items-end justify-between px-[10vw]'>
+    <section className='inputs-container flex flex-row w-full items-end justify-between px-[10vw]'>
       <InputSearch 
         value={search}
-        className='mt-[35px]'
+        className='input-search mt-[35px]'
         classNames={{
           input: 'bg-light-elements text-light-text text-[1.5rem]',
           inputWrapper: 'bg-light-elements border shadow-lg rounded-md'

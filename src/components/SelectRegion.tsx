@@ -19,7 +19,7 @@ export function SelectRegion() {
       labelPlacement="outside"
       variant="bordered"
       label="Filter by Region" 
-      className="max-w-xs bg-light-elements" 
+      className="input-region bg-light-elements" 
       classNames={{
         label: 'text-[1.5rem] text-bold text-light-text',
         value: 'text-[1.8rem]',
