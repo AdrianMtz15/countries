@@ -7,20 +7,18 @@ import { InputSearch } from '@components/InputSearch'
 import { SelectRegion } from '@components/SelectRegion'
 
 
-type HandleInput = ChangeEventHandler<HTMLInputElement>
+type InputHandler = ChangeEventHandler<HTMLInputElement>
 
 export function MainHeader() {
   const search = useStore(state => state.search);
+  const allCountries = useStore(state => state.allCountries);
   const setSearch = useStore(state => state.setSearch);
   const setFilteredCountries = useStore((state) => state.setFilteredCountries);
+  const filteredCountries = useStore((state) => state.filteredCountries);
 
-  const { filterBySearch } = useFilterCountries();
-
-  const handleInputChange: HandleInput = (event) => {
-    const filteredCountries = filterBySearch(event.target.value);
-
-    setSearch(event.target.value);
-    setFilteredCountries(filteredCountries);
+  const handleInputChange: InputHandler = (event) => {
+    const search = event.target.value;
+    setSearch(search);
   }
 
   return(

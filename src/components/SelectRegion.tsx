@@ -1,20 +1,28 @@
 'use client'
-
-import { useCountriesContext } from "@context/CountriesContext";
+import { ChangeEventHandler } from 'react';
+import { useStore } from '@src/store';
 import { Select, SelectItem } from "@nextui-org/react"
 
+type SelectHandler = ChangeEventHandler<HTMLSelectElement>
 
 export function SelectRegion() {
   const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
-  const {
-    setRegion
-  } = useCountriesContext();
+
+  const setRegion = useStore(state => state.setRegion);
+  const allCountries = useStore(state => state.allCountries);
+  const filteredCountries = useStore(state => state.filteredCountries);
+  const setFilteredCountries = useStore(state => state.setFilteredCountries);
+
+
+  const handleChangeRegion: SelectHandler = (event) => {
+    const selected = event.target.value;
+    setRegion(selected);
+  }
+
 
   return(
     <Select 
-      onChange={(e) => {
-        setRegion(e.target.value);
-      }}
+      onChange={handleChangeRegion}
       radius="none"
       labelPlacement="outside"
       variant="bordered"

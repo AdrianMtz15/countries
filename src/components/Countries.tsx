@@ -6,6 +6,7 @@ import { CountryCard } from "@components/CountryCard";
 
 import type { HTMLAttributes, ReactNode, RefObject } from "react";
 import { useInfiniteScroll } from "@src/hooks/useInfiniteScroll";
+import { useFilterCountries } from "@src/hooks/useFilterCountries";
 
 type Props = HTMLAttributes<HTMLElement> & {defaultCountries: CountryData[]}
 
@@ -17,8 +18,11 @@ export function Countries({ defaultCountries, className, ...htmlProps }: Props) 
   const renderCountries = useStore((state) => state.renderCountries);
   const filteredCountries = useStore((state) => state.filteredCountries);
   const isLoading = useStore((state) => state.isLoading);
+  const search = useStore((state) => state.search);
+  const region = useStore((state) => state.region);
 
   const { targetIndex } = useInfiniteScroll();
+  const { filterCountries } = useFilterCountries();
 
   useEffect(() => {
     setAllCountries(defaultCountries);
@@ -26,13 +30,16 @@ export function Countries({ defaultCountries, className, ...htmlProps }: Props) 
   }, []);
 
   useEffect(() => {
-    if(filteredCountries.length > 0) {
+    if(region.length > 0 || search.length > 0) {
       setCurrentCountries(filteredCountries);
     } else {
       setCurrentCountries(renderCountries);
     }
   }, [renderCountries, filteredCountries])
 
+  useEffect(() => {
+    filterCountries(search, region);
+  }, [search, region])
   
   return(
     <section 
