@@ -1,19 +1,23 @@
 import { useStore } from "@src/store";
 
 export function useFilterCountries() {
-  const renderCountries = useStore(state => state.renderCountries);
-  const search = useStore(state => state.search);
+  const allCountries = useStore(state => state.allCountries);
 
-  const filterBySearch = () => {
-    const data = renderCountries.filter((obj, index) => {
-      const searchText = search.toLowerCase();
-      const countryName = obj.name.common.toLowerCase();
-      const isSearched = countryName.includes(searchText);
+  const filterBySearch = (text: string) => {
 
-      return isSearched;
-    });
+    if(text.length > 0) {
+      const data = allCountries.filter((obj, index) => {
+        const searchText = text.toLowerCase();
+        const countryName = obj.name.common.toLowerCase();
+        const isSearched = countryName.includes(searchText);
+  
+        return isSearched;
+      });
 
-    return data;
+      return data;
+    } else {
+      return [];
+    }
   }
 
   return {

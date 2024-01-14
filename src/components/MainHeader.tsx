@@ -17,9 +17,9 @@ export function MainHeader() {
   const { filterBySearch } = useFilterCountries();
 
   const handleInputChange: HandleInput = (event) => {
-    const filteredCountries = filterBySearch();
+    const filteredCountries = filterBySearch(event.target.value);
 
-    setSearch(event.target.value)
+    setSearch(event.target.value);
     setFilteredCountries(filteredCountries);
   }
 
@@ -29,8 +29,8 @@ export function MainHeader() {
         value={search}
         className='input-search mt-[35px]'
         classNames={{
-          input: 'bg-light-elements text-light-text text-[1.5rem]',
-          inputWrapper: 'bg-light-elements border shadow-lg rounded-md'
+          input: '  text-[1.5rem]',
+          inputWrapper: ' border shadow-lg rounded-md'
         }}
         onChange={handleInputChange}
       />

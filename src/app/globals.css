@@ -12,6 +12,10 @@ html {
   font-size: 62.5%;
 }
 
+nav {
+  padding: 0 calc((100% - 280px) / 2);
+}
+
 .inputs-container{
   padding: 0;
   flex-direction: column;
@@ -42,6 +46,10 @@ html {
 }
 
 @media (min-width: 500px) {
+  nav {
+    padding: 0 30px;
+  }
+
   .inputs-container{
     margin-top: 35px;
     max-width: none;
@@ -96,11 +104,15 @@ html {
 
 @media (min-width: 1000px) {
   .countries-container {
-    justify-content: space-between;
+    justify-content: start;
   }
 
   .cards-container {
     width: 25%;
+  }
+
+  .country-card {
+    max-width: none;
   }
 
 

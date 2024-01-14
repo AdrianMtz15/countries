@@ -11,7 +11,8 @@ type CountriesContext = {
     region: string,
     loading: boolean,
   }
-  setCountriesState: Dispatch<SetStateAction<CountriesState>>
+  setCountriesState: Dispatch<SetStateAction<CountriesState>>,
+  setRegion: (region: string) => void
 
 }
 
@@ -23,7 +24,8 @@ const CountriesContext = createContext<CountriesContext>({
     region: '',
     loading: false,
   },
-  setCountriesState: () => {}
+  setCountriesState: () => {},
+  setRegion: (region: string) => {}
 });
 
 type CountriesState = {
@@ -51,9 +53,17 @@ export const CountriesProvider = ({children, defaultCountries}: PropsWithChildre
     search,
   } = countriesState;
 
+
   useEffect(() => {
     filterBySearch();
   }, [search]);
+
+  const setRegion = (region: string) => {
+    setCountriesState({
+      ...countriesState,
+      region
+    });
+  }
 
   const filterBySearch = () => {
     if(search.length > 0) {
@@ -92,6 +102,8 @@ export const CountriesProvider = ({children, defaultCountries}: PropsWithChildre
     }
   }
 
+
+
   // const filterByRegion = () => {
 
   //   if(region.length > 0 ) {
@@ -112,7 +124,8 @@ export const CountriesProvider = ({children, defaultCountries}: PropsWithChildre
       state: {
         ...countriesState,
       },
-      setCountriesState
+      setCountriesState,
+      setRegion
     }}>
       {children}
     </CountriesContext.Provider>

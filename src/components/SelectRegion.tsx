@@ -19,11 +19,12 @@ export function SelectRegion() {
       labelPlacement="outside"
       variant="bordered"
       label="Filter by Region" 
-      className="input-region bg-light-elements" 
+      className="input-region " 
       classNames={{
-        label: 'text-[1.5rem] text-bold text-light-text',
+        label: 'text-[1.5rem] text-bold ',
         value: 'text-[1.8rem]',
-        trigger: 'rounded-md border bg-light-elements',
+        base: 'rounded-md',
+        trigger: 'rounded-md border ',
         listboxWrapper: 'rounded-md',
         listbox: 'rounded-md',
       }}

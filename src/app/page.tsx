@@ -17,7 +17,7 @@ export default async function Home() {
       <MainHeader/>
       <Countries defaultCountries={data}
         className="flex flex-row w-full flex-wrap
-        items-start justify-items-center"
+        items-start justify-items-start"
       />
     </main>
   )

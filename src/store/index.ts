@@ -8,6 +8,7 @@ type CountriesState = {
   search: string,
   region: string,
   isLoading: boolean,
+  darkMode: boolean,
   observerRef: RefObject<Element> | null
 }
 
@@ -17,7 +18,8 @@ type CountriesActions = {
   setRenderCountries: (list: CountryData[]) => void,
   setSearch: (text: string) => void,
   setRegion: (region: string) => void,
-  setLoading: (isLoading: boolean) => void
+  setLoading: (isLoading: boolean) => void,
+  setDarkMode: (darkMode: boolean) => void,
   setObserverRef: (ref: RefObject<Element> | null) => void
 }
 
@@ -29,6 +31,7 @@ export const useStore = create<CountriesStore>(set => ({
   filteredCountries: [],
   search: '',
   region: '',
+  darkMode: true,
   isLoading: false,
   observerRef: null,
   setAllCountries: (data) => {
@@ -70,6 +73,13 @@ export const useStore = create<CountriesStore>(set => ({
     set((state) => {
       return {
         isLoading: isLoading
+      }
+    });
+  },
+  setDarkMode: (darkMode) => {
+    set((state) => {
+      return {
+        darkMode,
       }
     });
   },
